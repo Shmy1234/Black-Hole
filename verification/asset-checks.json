@@ -1,0 +1,16 @@
+{
+  "deflection": {
+    "width": 512.0,
+    "height": 512.0,
+    "bytes": 2097160,
+    "valid": true
+  },
+  "inverse_radius": {
+    "width": 64.0,
+    "height": 32.0,
+    "bytes": 16392,
+    "valid": true
+  },
+  "doppler_bytes_valid": true,
+  "blackbody_bytes_valid": true
+}

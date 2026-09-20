@@ -1,0 +1,12 @@
+{
+  "source": "https://ebruneton.github.io/black_hole_shader/demo/demo.html",
+  "retrieved": "2026-09-20",
+  "sha256": {
+    "prototype/upstream-demo.html": "dcac9096bfc9455740e710c5588016ecf1e758377c3f64279e08e6d1f6c8f162",
+    "prototype/assets/inverse_radius.dat": "7fa22a9270e61f2842c97fb1a9398bcb13e1a965ad39b0f73169354a0d608b04",
+    "prototype/assets/noise_texture.png": "7ba6d84ad14496b6299b57dbbc75b400fad4e9ab022dcacfc7f3fa3751009ed9",
+    "prototype/assets/black_body.dat": "aac8ed78dde66d9b44da8b65142429470c89b5edeb74a8fde8dfc000777a2d97",
+    "prototype/assets/deflection.dat": "1080f45a12fba81321771c2071f4a31795444b110833f61384a9bdf7d057c19d",
+    "prototype/assets/doppler.dat": "5174fff7559f82771977f7aadf00bbc071a010fc2913fe9a26d9ecd0f04afe50"
+  }
+}

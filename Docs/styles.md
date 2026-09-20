@@ -1,6 +1,15 @@
 # Visual reference and interaction direction
 
-Status: reference analysis and proposals, not an approved interface design.
+Status: reference analysis plus implemented full-screen exterior view.
+
+## Implemented screen — 2026-09-20
+
+User requested only the black hole on screen. The canvas fills the viewport;
+demo controls, orbit diagram, labels, and status strip are permanently hidden.
+Their existing DOM remains for upstream model bindings. License attribution is
+retained in the source, standalone license, and README. Error feedback can still
+appear if required assets or WebGL support fail. Drag/scroll remain available;
+keyboard focus on the canvas enables arrow and distance controls.
 
 ## Observed in the supplied image
 

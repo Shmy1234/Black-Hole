@@ -1,4 +1,4 @@
-# Black Hole — exterior prototype
+# Black Hole
 
 Run from this directory:
 
@@ -8,17 +8,17 @@ python3 -m http.server 8080 --bind 127.0.0.1
 
 Open http://127.0.0.1:8080/prototype/ in a desktop browser with WebGL2.
 
-- Drag to look around; use **Inclination** to change the orbital viewing angle.
-- Scroll to change observer distance. **Stop** motion first if the distance is locked.
-- Use Exposure, Bloom, and Disc Temperature to explore the existing renderer.
-- Press Space to hide/show controls. Reload without URL parameters to reset.
+- Drag to look around and scroll to change observer distance.
+- Focus the canvas with Tab. Up/down change orbital inclination; left/right change
+  look direction; plus/minus move closer/farther.
+- The scene fills the screen. Demo panels, labels, and their shortcuts are disabled.
 
 This is a local adaptation of Eric Bruneton's Schwarzschild renderer, not a new
 physics implementation. It models a nonrotating black hole and a simplified disk.
 The background is plain black; stars and the rocket are disabled for this slice.
 The upstream drag control changes camera direction, not the observer's orbit.
-The original motion controls remain experimental and do not establish correct
-horizon-interior rendering. No independent physical-accuracy claim is made.
+This view starts stationary outside the horizon. Horizon-interior rendering has
+not been implemented or validated. No independent physical-accuracy claim is made.
 
 The shader and data come from https://ebruneton.github.io/black_hole_shader/demo/demo.html.
 `prototype/upstream-demo.html` is the unmodified downloaded page;

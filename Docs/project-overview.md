@@ -3,7 +3,8 @@
 ## Status
 
 A local exterior prototype has been implemented from the approved Bruneton baseline.
-Visual/runtime acceptance is pending; see the current checkpoint.
+The subsequent full-screen cleanup and desktop-browser interaction checks passed;
+see the current checkpoint for evidence and physical-model limits.
 The workspace initially contained only this empty `Docs` directory. It does not
 have a project-local Git repository; Git resolves to a parent outside the project.
 

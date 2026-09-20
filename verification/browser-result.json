@@ -1,0 +1,39 @@
+{
+  "errors": [],
+  "state": {
+    "text": "",
+    "model": {
+      "r": 12.797500000000003,
+      "p": [
+        12.700636050517556,
+        0,
+        1.571575694102543
+      ],
+      "yaw": 0,
+      "inclination": 0.12311410899281837
+    },
+    "canvas": {
+      "x": 0,
+      "y": 0,
+      "width": 1280,
+      "height": 800,
+      "top": 0,
+      "right": 1280,
+      "bottom": 800,
+      "left": 0
+    }
+  },
+  "checks": {
+    "noPanelsAfterSpace": true,
+    "scrollMovesOut": true,
+    "dragChangesView": true,
+    "keyboardChangesInclination": true
+  },
+  "timing": {
+    "median": 16.699999999999818,
+    "p95": 16.700000000000728
+  },
+  "browser": "153.0.8010.50",
+  "fartherRadius": 13.449774999999997,
+  "draggedYaw": 6.162757588791978
+}

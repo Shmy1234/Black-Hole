@@ -30,7 +30,8 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
  * THE POSSIBILITY OF SUCH DAMAGE.
 -->
-    <title>Black Hole — Exterior Prototype</title>
+    <title>Black Hole</title>
+    <link rel="icon" href="data:,">
     
     <style>
 
@@ -3301,8 +3302,14 @@ window.addEventListener('DOMContentLoaded', () => {
     </script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-html,body{background:#030406;font-family:system-ui,sans-serif}
-#prototype_status{position:fixed;bottom:34px;left:50%;transform:translateX(-50%);padding:10px 16px;border:1px solid #ffffff22;border-radius:8px;background:#080b12dd;font-size:12px;text-align:center;pointer-events:none;z-index:10}
+html,body{background:#000;font-family:system-ui,sans-serif;overscroll-behavior:none}
+/* Retain the upstream controller DOM for its model bindings, but remove all
+   demonstration UI from layout, keyboard navigation, and the accessibility tree. */
+.sp-panel,.op-panel,.cv-loading-panel,.cv-copyright,#prototype_status{display:none!important}
+#camera_view{display:block;cursor:grab;touch-action:none;outline:none}
+#camera_view:active{cursor:grabbing}
+#camera_view:focus-visible{outline:1px solid #ffffff40;outline-offset:-2px}
+.cv-error-panel{z-index:20;background:#151515;border-color:#555;border-radius:8px}
 </style>
 </head>
   <body>
@@ -4209,8 +4216,8 @@ vec3 SceneColor(vec4 camera_position, vec3 p, vec4 k_s, vec3 e_tau, vec3 e_w,
 }
     </script>
     <div class="cv-container">
-      <canvas id="camera_view" width="400" height="300"></canvas>
-      <div id="cv_error_panel" class="cv-error-panel cv-hidden">
+      <canvas id="camera_view" width="400" height="300" tabindex="0" aria-label="Interactive black hole. Drag to look around, scroll to approach or retreat. Arrow keys change the view; plus and minus change distance."></canvas>
+      <div id="cv_error_panel" class="cv-error-panel cv-hidden" role="alert">
       </div>
       <div id="cv_loading_panel" class="cv-loading-panel">
         <span>Loading stars data...</span>
@@ -4563,6 +4570,43 @@ Shortcut: CTRL + mouse drag">
   <div id="prototype_status">EXTERIOR PROTOTYPE · Drag to look · Scroll for distance · Inclination changes orbit view · Space hides controls</div>
 <script>
 window.addEventListener('DOMContentLoaded', () => {
+  const model = BlackHoleShaderDemoApp.model;
+  // Ignore old demo URLs that could leave the clean scene looking away or moving.
+  model.setState(BlackHoleShaderDemoApp.State.STOPPED);
+  model.cameraYaw.setValue(0);
+  model.cameraPitch.setValue(0);
+  model.exposure.setValue(0.008);
+  model.bloom.setValue(0.025);
+  model.stars.setValue(false);
+  model.rocket.setValue(false);
+  // Loading failures remain visible even though the prototype status strip is gone.
+  const status = document.getElementById('prototype_status');
+  new MutationObserver(() => {
+    const error = document.getElementById('cv_error_panel');
+    error.textContent = status.textContent;
+    error.classList.remove('cv-hidden');
+  }).observe(status, {childList:true,subtree:true,characterData:true});
+  const canvas = document.getElementById('camera_view');
+  canvas.addEventListener('keydown', event => {
+    const keys = ['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','+','=','-'];
+    if (!keys.includes(event.key)) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      model.orbitInclination.setValue(model.orbitInclination.getValue() + (event.key === 'ArrowUp' ? 0.04 : -0.04));
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+      model.cameraYaw.setValue(model.cameraYaw.getValue() + (event.key === 'ArrowLeft' ? 0.04 : -0.04));
+    } else {
+      model.startRadius.setValue(Math.max(3.1, model.startRadius.getValue() * (event.key === '-' ? 1.05 : 1 / 1.05)));
+    }
+  });
+  // Demo shortcuts could start motion or change exposure with no visible state.
+  document.body.addEventListener('keypress', event => {
+    if ([' ', 'p', 'd', 'b', 'l', 'f', 'r', '+', '-'].includes(event.key)) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }, true);
   for (const id of ['sp_rocket','sp_stars']) {
     const input = document.getElementById(id); input.checked = false; input.disabled = true;
   }

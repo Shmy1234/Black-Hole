@@ -1,33 +1,39 @@
 # Current checkpoint
 
-Current milestone: [P1 — Local exterior prototype](build-plan.md).
-Started 2026-09-20 08:46 UTC. Paused at the five-minute implementation boundary.
+Current milestone: [P2 — Full-screen visualizer](build-plan.md), completed
+2026-09-20. Work ran from 09:01 to 09:06 UTC.
 
 ## Changes
 
-`prototype/index.html` adapts the downloaded Bruneton demo. The five required
-lookup/noise assets are local; original source, SHA-256 manifest, and BSD notice
-are retained alongside it. External font, star-catalogue downloads, and rocket
-loading are removed. Blank cubemaps supply a plain black background.
-Existing controls remain; drag changes look direction and Inclination changes
-orbital viewing angle. Defaults aim at the hole from a stationary exterior view.
+Only the black-hole canvas is visible in normal operation. Demo panels, orbit
+diagram, attribution overlay, and status strip are permanently hidden. Required
+upstream DOM bindings remain. Attribution is retained in the source and LICENSE.
+Drag/scroll work; focused-canvas arrows and plus/minus provide keyboard controls.
+Old demo shortcuts cannot restore panels or start hidden motion. Reduced exposure
+and bloom make the central shadow visible. Asset errors still surface in an alert.
 See [run instructions](../README.md).
 
 ## Evidence
 
-- JavaScript extracted from the page passes `node --check`.
-- Lookup dimensions and expected binary byte counts pass; see
-  [asset checks](../verification/asset-checks.json).
-- The escalated local server serves the page. Isolated Chrome produced
-  [an initial screenshot](../verification/initial.png): controls appear, but no disk
-  is visible in the captured frame. Chrome logged macOS display-link errors.
-  This does not establish whether the cause is capture timing, headless rendering,
-  or an application issue; rendering acceptance has not passed.
-- No visual acceptance, frame-rate result, independent numerical validation, or
-  completed milestone is claimed.
+- Isolated Chrome 153.0.8010.50 on arm64 macOS 26.5.2, viewport 1280×800.
+- Real rendered disk confirmed in [final screenshot](../verification/rendered.png).
+- Zero captured browser errors; normal visible body text is empty.
+- Passed drag/view, outward scroll, keyboard inclination, and Space/no-panel checks.
+- Outward scroll increases radius from 12.7975 to 13.4498; the
+  [farther screenshot](../verification/farther.png) shows reduced apparent size.
+- Thirty requestAnimationFrame intervals: median 16.7 ms, p95 16.7 ms. This is a
+  short frame-callback sample, not a GPU benchmark or sustained performance claim.
+- Two Sol agents independently reviewed rendering and UI/event wiring. Their
+  overexposure finding was corrected and the final image independently accepted.
+- [Results](../verification/browser-result.json) and
+  [browser check](../verification/browser-check.cjs) are retained. The script uses
+  an existing machine-local Playwright installation; it installs no dependencies.
 
 ## Next action
 
-Investigate why the initial browser capture shows no disk, then vary
-Inclination, and increase distance. Record performance and any rendering errors.
-Current sessions at pause: server 9079; isolated Chrome check 65010.
+Review the clean scene at http://127.0.0.1:8080/prototype/. The local server is
+running in session 48065; browser checks have exited. The original blank capture
+was not reproduced after waiting for rendering; its historical cause is unknown.
+This remains a Schwarzschild exterior renderer with a simplified disk. Physical
+infall, touch interaction, cross-browser/mobile checks, and independent physics
+validation are outside this completed screen-cleanup slice.

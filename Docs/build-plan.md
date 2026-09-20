@@ -74,4 +74,22 @@ and release questions remain open and do not block this experiment.
 - [] Record observed performance on a named browser/device.
 
 Boundary: local nonrotating exterior prototype using existing controls.
-Acceptance remains incomplete until the browser checks above are observed.
+P1's visible-control interface is superseded by the user's P2 request. Underlying
+disk and view/distance behavior were verified during P2; its original remaining
+checklist is retained above as the historical boundary.
+
+## Selected full-screen milestone — 2026-09-20
+
+[x] P2 — Show only the black hole and verify with two Sol reviewers.
+
+Outcome: full-screen exterior scene with no demo panels or labels, preserving
+drag/scroll interaction and keyboard access.
+
+- [x] Permanently remove panels and labels from layout and accessibility navigation.
+- [x] Preserve interaction bindings and prevent hidden demo shortcuts.
+- [x] Confirm a visible disk and shadow; correct overexposure found by review.
+- [x] Browser-check drag, outward scroll, keyboard inclination, and Space behavior.
+- [x] Obtain two Sol reviews and retain screenshots/results in verification/.
+
+Evidence: [current checkpoint](progress-tracker.md). This milestone does not
+claim Kerr, horizon-interior rendering, or complete astrophysical validation.
